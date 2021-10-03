@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LaboratoryResults" representedClassName="LaboratoryResults" syncable="YES" codeGenerationType="class">
+        <attribute name="driedWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="liquidLimit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="no4" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="no10" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="no40" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="no200" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pan" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="plasticLimit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="threeFourInch" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="threeInch" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="wetWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="parentSample" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sample" inverseName="laboratoryResultList" inverseEntity="Sample"/>
+    </entity>
+    <entity name="Sample" representedClassName="Sample" syncable="YES" codeGenerationType="class">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="laboratoryResultList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LaboratoryResults" inverseName="parentSample" inverseEntity="LaboratoryResults"/>
+    </entity>
+    <elements>
+        <element name="LaboratoryResults" positionX="-63" positionY="-18" width="128" height="223"/>
+        <element name="Sample" positionX="150.76171875" positionY="87.1875" width="128" height="88"/>
+    </elements>
+</model>

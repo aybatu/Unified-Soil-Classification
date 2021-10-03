@@ -7,25 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E9075AD270A5944002A4371 /* SavedSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9075AC270A5944002A4371 /* SavedSampleViewController.swift */; };
 		1EFAFF10270932AB00BC22C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF0F270932AB00BC22C7 /* AppDelegate.swift */; };
 		1EFAFF12270932AB00BC22C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF11270932AB00BC22C7 /* SceneDelegate.swift */; };
-		1EFAFF14270932AB00BC22C7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF13270932AB00BC22C7 /* ViewController.swift */; };
+		1EFAFF14270932AB00BC22C7 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF13270932AB00BC22C7 /* RootViewController.swift */; };
 		1EFAFF17270932AB00BC22C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EFAFF15270932AB00BC22C7 /* Main.storyboard */; };
 		1EFAFF1A270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF18270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodeld */; };
 		1EFAFF1C270932AE00BC22C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EFAFF1B270932AE00BC22C7 /* Assets.xcassets */; };
 		1EFAFF1F270932AE00BC22C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EFAFF1D270932AE00BC22C7 /* LaunchScreen.storyboard */; };
+		1EFAFF2C270937B700BC22C7 /* TestResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF2B270937B700BC22C7 /* TestResultsViewController.swift */; };
+		1EFAFF522709DCBD00BC22C7 /* TestResultsCalculationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF512709DCBD00BC22C7 /* TestResultsCalculationModel.swift */; };
+		1EFAFF542709F88F00BC22C7 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF532709F88F00BC22C7 /* Constant.swift */; };
+		1EFAFF562709F96D00BC22C7 /* EvaluatedResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF552709F96D00BC22C7 /* EvaluatedResultViewController.swift */; };
+		1EFAFF582709F9A500BC22C7 /* GradationChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF572709F9A500BC22C7 /* GradationChartViewController.swift */; };
+		1EFAFF5A2709F9BD00BC22C7 /* PlasticityChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF592709F9BD00BC22C7 /* PlasticityChartViewController.swift */; };
+		1EFAFF5C2709FA1C00BC22C7 /* SoilClassificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFAFF5B2709FA1C00BC22C7 /* SoilClassificationModel.swift */; };
+		9262226D668A330719F75FFE /* Pods_Unified_Soil_Classification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231B93616147F37BE287CDE6 /* Pods_Unified_Soil_Classification.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E9075AC270A5944002A4371 /* SavedSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSampleViewController.swift; sourceTree = "<group>"; };
 		1EFAFF0C270932AB00BC22C7 /* Unified Soil Classification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unified Soil Classification.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EFAFF0F270932AB00BC22C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EFAFF11270932AB00BC22C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1EFAFF13270932AB00BC22C7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1EFAFF13270932AB00BC22C7 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		1EFAFF16270932AB00BC22C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1EFAFF19270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Unified_Soil_Classification.xcdatamodel; sourceTree = "<group>"; };
 		1EFAFF1B270932AE00BC22C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EFAFF1E270932AE00BC22C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1EFAFF20270932AE00BC22C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EFAFF2B270937B700BC22C7 /* TestResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsViewController.swift; sourceTree = "<group>"; };
+		1EFAFF512709DCBD00BC22C7 /* TestResultsCalculationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsCalculationModel.swift; sourceTree = "<group>"; };
+		1EFAFF532709F88F00BC22C7 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		1EFAFF552709F96D00BC22C7 /* EvaluatedResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluatedResultViewController.swift; sourceTree = "<group>"; };
+		1EFAFF572709F9A500BC22C7 /* GradationChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradationChartViewController.swift; sourceTree = "<group>"; };
+		1EFAFF592709F9BD00BC22C7 /* PlasticityChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasticityChartViewController.swift; sourceTree = "<group>"; };
+		1EFAFF5B2709FA1C00BC22C7 /* SoilClassificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoilClassificationModel.swift; sourceTree = "<group>"; };
+		231B93616147F37BE287CDE6 /* Pods_Unified_Soil_Classification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unified_Soil_Classification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C6A21DC9650702B89787CA0 /* Pods-Unified Soil Classification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unified Soil Classification.release.xcconfig"; path = "Target Support Files/Pods-Unified Soil Classification/Pods-Unified Soil Classification.release.xcconfig"; sourceTree = "<group>"; };
+		F9E8E48F437523DF41082DD5 /* Pods-Unified Soil Classification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unified Soil Classification.debug.xcconfig"; path = "Target Support Files/Pods-Unified Soil Classification/Pods-Unified Soil Classification.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9262226D668A330719F75FFE /* Pods_Unified_Soil_Classification.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +65,8 @@
 			children = (
 				1EFAFF0E270932AB00BC22C7 /* Unified Soil Classification */,
 				1EFAFF0D270932AB00BC22C7 /* Products */,
+				E5CE06F0E05B59FAA7A96A78 /* Pods */,
+				75BBC2E574034C784666D634 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +81,81 @@
 		1EFAFF0E270932AB00BC22C7 /* Unified Soil Classification */ = {
 			isa = PBXGroup;
 			children = (
+				1EFAFF26270932EA00BC22C7 /* Delegate */,
+				1EFAFF282709331500BC22C7 /* Model */,
+				1EFAFF2A2709338100BC22C7 /* View */,
+				1EFAFF272709330B00BC22C7 /* Controller */,
+				1EFAFF292709337300BC22C7 /* Support */,
+			);
+			path = "Unified Soil Classification";
+			sourceTree = "<group>";
+		};
+		1EFAFF26270932EA00BC22C7 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
 				1EFAFF0F270932AB00BC22C7 /* AppDelegate.swift */,
 				1EFAFF11270932AB00BC22C7 /* SceneDelegate.swift */,
-				1EFAFF13270932AB00BC22C7 /* ViewController.swift */,
-				1EFAFF15270932AB00BC22C7 /* Main.storyboard */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		1EFAFF272709330B00BC22C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1EFAFF13270932AB00BC22C7 /* RootViewController.swift */,
+				1EFAFF2B270937B700BC22C7 /* TestResultsViewController.swift */,
+				1EFAFF552709F96D00BC22C7 /* EvaluatedResultViewController.swift */,
+				1EFAFF572709F9A500BC22C7 /* GradationChartViewController.swift */,
+				1EFAFF592709F9BD00BC22C7 /* PlasticityChartViewController.swift */,
+				1E9075AC270A5944002A4371 /* SavedSampleViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1EFAFF282709331500BC22C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EFAFF18270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodeld */,
+				1EFAFF512709DCBD00BC22C7 /* TestResultsCalculationModel.swift */,
+				1EFAFF5B2709FA1C00BC22C7 /* SoilClassificationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1EFAFF292709337300BC22C7 /* Support */ = {
+			isa = PBXGroup;
+			children = (
 				1EFAFF1B270932AE00BC22C7 /* Assets.xcassets */,
 				1EFAFF1D270932AE00BC22C7 /* LaunchScreen.storyboard */,
 				1EFAFF20270932AE00BC22C7 /* Info.plist */,
-				1EFAFF18270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodeld */,
+				1EFAFF532709F88F00BC22C7 /* Constant.swift */,
 			);
-			path = "Unified Soil Classification";
+			path = Support;
+			sourceTree = "<group>";
+		};
+		1EFAFF2A2709338100BC22C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EFAFF15270932AB00BC22C7 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75BBC2E574034C784666D634 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				231B93616147F37BE287CDE6 /* Pods_Unified_Soil_Classification.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5CE06F0E05B59FAA7A96A78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F9E8E48F437523DF41082DD5 /* Pods-Unified Soil Classification.debug.xcconfig */,
+				8C6A21DC9650702B89787CA0 /* Pods-Unified Soil Classification.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +165,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EFAFF23270932AE00BC22C7 /* Build configuration list for PBXNativeTarget "Unified Soil Classification" */;
 			buildPhases = (
+				EF04B90DF57749627979039E /* [CP] Check Pods Manifest.lock */,
 				1EFAFF08270932AB00BC22C7 /* Sources */,
 				1EFAFF09270932AB00BC22C7 /* Frameworks */,
 				1EFAFF0A270932AB00BC22C7 /* Resources */,
+				C25ABC63DF775682D5BA2BB9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,15 +226,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C25ABC63DF775682D5BA2BB9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unified Soil Classification/Pods-Unified Soil Classification-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Unified Soil Classification/Pods-Unified Soil Classification-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Unified Soil Classification/Pods-Unified Soil Classification-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF04B90DF57749627979039E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Unified Soil Classification-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1EFAFF08270932AB00BC22C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EFAFF14270932AB00BC22C7 /* ViewController.swift in Sources */,
+				1EFAFF582709F9A500BC22C7 /* GradationChartViewController.swift in Sources */,
+				1EFAFF5C2709FA1C00BC22C7 /* SoilClassificationModel.swift in Sources */,
+				1EFAFF542709F88F00BC22C7 /* Constant.swift in Sources */,
+				1EFAFF14270932AB00BC22C7 /* RootViewController.swift in Sources */,
 				1EFAFF1A270932AB00BC22C7 /* Unified_Soil_Classification.xcdatamodeld in Sources */,
+				1EFAFF2C270937B700BC22C7 /* TestResultsViewController.swift in Sources */,
+				1E9075AD270A5944002A4371 /* SavedSampleViewController.swift in Sources */,
+				1EFAFF5A2709F9BD00BC22C7 /* PlasticityChartViewController.swift in Sources */,
 				1EFAFF10270932AB00BC22C7 /* AppDelegate.swift in Sources */,
+				1EFAFF522709DCBD00BC22C7 /* TestResultsCalculationModel.swift in Sources */,
 				1EFAFF12270932AB00BC22C7 /* SceneDelegate.swift in Sources */,
+				1EFAFF562709F96D00BC22C7 /* EvaluatedResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +428,7 @@
 		};
 		1EFAFF24270932AE00BC22C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9E8E48F437523DF41082DD5 /* Pods-Unified Soil Classification.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -295,7 +436,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DY24C2H8X3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Unified Soil Classification/Info.plist";
+				INFOPLIST_FILE = "Unified Soil Classification/Support/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -316,6 +457,7 @@
 		};
 		1EFAFF25270932AE00BC22C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C6A21DC9650702B89787CA0 /* Pods-Unified Soil Classification.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -323,7 +465,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DY24C2H8X3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Unified Soil Classification/Info.plist";
+				INFOPLIST_FILE = "Unified Soil Classification/Support/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
