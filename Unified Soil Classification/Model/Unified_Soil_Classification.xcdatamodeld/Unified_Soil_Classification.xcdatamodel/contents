@@ -12,16 +12,16 @@
         <attribute name="threeFourInch" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="threeInch" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="wetWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="parentSample" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Sample" inverseName="parentTestResult" inverseEntity="Sample"/>
+        <relationship name="parentSample" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sample" inverseName="parentTestResult" inverseEntity="Sample"/>
     </entity>
     <entity name="Sample" representedClassName="Sample" syncable="YES" codeGenerationType="class">
         <attribute name="comment" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="uuid" attributeType="String"/>
-        <relationship name="parentTestResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LaboratoryResults" inverseName="parentSample" inverseEntity="LaboratoryResults"/>
+        <relationship name="parentTestResult" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LaboratoryResults" inverseName="parentSample" inverseEntity="LaboratoryResults"/>
     </entity>
     <elements>
         <element name="LaboratoryResults" positionX="-63" positionY="-18" width="128" height="223"/>
-        <element name="Sample" positionX="99.9453125" positionY="79.26171875" width="128" height="103"/>
+        <element name="Sample" positionX="115.47265625" positionY="101.484375" width="128" height="103"/>
     </elements>
 </model>

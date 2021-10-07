@@ -70,6 +70,22 @@ class SavedSampleViewController: UITableViewController {
         }
     }
     
+    
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        context.delete(sample[indexPath.row])
+        do {
+            try context.save()
+        } catch {
+            print("delete error table view: \(error)")
+        }
+        loadData()
+    }
+    
     //MARK: - Data manipulation
     
     func loadData() {

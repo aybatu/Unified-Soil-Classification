@@ -151,7 +151,7 @@ class EvaluatedResultViewController: UIViewController {
     
     func loadSampleData() {
         let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-        let samplePredicate = NSPredicate(format: "parentSample.name MATCHES %@", sample!.name!)
+        let samplePredicate = NSPredicate(format: "parentSample.uuid MATCHES %@", sample!.uuid!)
 
         request.predicate = samplePredicate
 
