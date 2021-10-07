@@ -84,7 +84,7 @@
             <objects>
                 <tableViewController id="60Z-s4-eUW" customClass="SavedSampleViewController" customModule="Unified_Soil_Classification" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vY6-kq-BEt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -453,7 +453,13 @@
                             <constraint firstItem="iZE-Bt-Uun" firstAttribute="leading" secondItem="DIi-SD-B59" secondAttribute="leading" id="z4d-rV-42K"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Uxe-Tm-HId"/>
+                    <navigationItem key="navigationItem" id="Uxe-Tm-HId">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="7vd-nA-Tlz">
+                            <connections>
+                                <action selector="backPressed:" destination="EqF-e0-kP2" id="0h1-4r-Plx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="driedLabel" destination="qT8-pA-292" id="oi2-bt-znk"/>
                         <outlet property="liquidLimitLabel" destination="jfA-sO-aE3" id="RVI-FP-TvY"/>
@@ -497,15 +503,15 @@
             <objects>
                 <viewController id="Y0A-g4-rKC" customClass="PlasticityChartViewController" customModule="Unified_Soil_Classification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Er-by-NIK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dM-Zr-jtW" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="30" y="30" width="354" height="592"/>
+                                <rect key="frame" x="30" y="118" width="354" height="558"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="hCV-uC-r3O">
-                                <rect key="frame" x="10" y="662" width="394" height="77"/>
+                                <rect key="frame" x="10" y="716" width="394" height="77"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="105" translatesAutoresizingMaskIntoConstraints="NO" id="nyU-e4-M8W">
                                         <rect key="frame" x="109.5" y="0.0" width="175" height="20.5"/>
@@ -562,17 +568,17 @@
             <objects>
                 <viewController id="fMl-RY-QkH" customClass="EvaluatedResultViewController" customModule="Unified_Soil_Classification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R0H-zg-Fn1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gu-c6-7x0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d26-sk-fn7">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-3z-Ybz">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="iyw-oV-fpo">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="234.5"/>
@@ -598,10 +604,10 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="dt4-4h-NOp">
-                                                        <rect key="frame" x="0.0" y="264.5" width="414" height="419.5"/>
+                                                        <rect key="frame" x="0.0" y="264.5" width="414" height="385.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fAM-ww-Wdr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="158.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="124.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter sample name below you would like to save. In order to save new sample you must specify sample name." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rQ-P2-Q9t">
                                                                         <rect key="frame" x="20" y="0.0" width="374" height="61"/>
@@ -610,7 +616,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sample name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2bZ-cP-NBq">
-                                                                        <rect key="frame" x="20" y="71" width="374" height="87.5"/>
+                                                                        <rect key="frame" x="20" y="71" width="374" height="53.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -623,7 +629,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SFT-s4-R8l">
-                                                                <rect key="frame" x="0.0" y="208.5" width="414" height="211"/>
+                                                                <rect key="frame" x="0.0" y="174.5" width="414" height="211"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You would like to add comments for the evaluated sample below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hV-Gw-67Q">
                                                                         <rect key="frame" x="20" y="0.0" width="374" height="41"/>
@@ -650,7 +656,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="BU9-DY-VQi">
-                                                        <rect key="frame" x="0.0" y="714" width="414" height="45"/>
+                                                        <rect key="frame" x="0.0" y="680" width="414" height="45"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kA-a6-jus">
                                                                 <rect key="frame" x="0.0" y="0.0" width="206.5" height="45"/>
@@ -722,7 +728,9 @@
                     <navigationItem key="navigationItem" id="cAg-IY-PKh"/>
                     <connections>
                         <outlet property="commentField" destination="yYx-g5-5pg" id="x0u-MW-fGc"/>
+                        <outlet property="discardButton" destination="NBD-Ox-Suz" id="RDY-gt-TTo"/>
                         <outlet property="nameField" destination="2bZ-cP-NBq" id="TUH-mJ-nAY"/>
+                        <outlet property="saveButton" destination="9kA-a6-jus" id="xFu-Dh-rMu"/>
                         <outlet property="scrollView" destination="6Gu-c6-7x0" id="xjQ-He-KVt"/>
                         <outlet property="soilLabel" destination="vad-ZK-b79" id="X1I-YX-vDs"/>
                         <segue destination="60Z-s4-eUW" kind="show" identifier="resultViewToTableView" id="oUS-wJ-6U0"/>
@@ -737,21 +745,21 @@
             <objects>
                 <viewController id="7dN-fA-3p9" customClass="GradationChartViewController" customModule="Unified_Soil_Classification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AnS-29-FYQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f91-o9-kRa" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="20" y="20" width="374" height="591"/>
+                                <rect key="frame" x="20" y="108" width="374" height="557"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gradation Chart is Only Supported for Coarse Type Soils." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVw-tv-XZ1">
-                                <rect key="frame" x="60" y="40" width="328" height="48"/>
+                                <rect key="frame" x="60" y="128" width="328" height="48"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="bpd-Ml-0La">
-                                <rect key="frame" x="20" y="651" width="374" height="88"/>
+                                <rect key="frame" x="20" y="705" width="374" height="88"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="EQa-k8-Oty">
                                         <rect key="frame" x="103" y="0.0" width="168" height="24"/>
@@ -869,7 +877,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7db-aK-Xkm"/>
+        <segue reference="L03-jI-XP2"/>
         <segue reference="oUS-wJ-6U0"/>
     </inferredMetricsTieBreakers>
     <resources>

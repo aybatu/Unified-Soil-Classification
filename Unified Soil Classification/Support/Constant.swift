@@ -25,4 +25,17 @@ struct K {
         static let ol = "ol"
         static let oh = "oh"
     }
+    struct laboratoryTests {
+        static let threeInch = "threeInch"
+        static let threeFourInch = "threeFourInch"
+        static let noFour = "noFour"
+        static let noTen = "noTen"
+        static let noFourty = "noFourty"
+        static let noTwoHundred = "noTwoHundred"
+        static let pan = "pan"
+        static let plasticLimit = "plasticLimit"
+        static let liquidLimit = "liquidLimit"
+        static let wetWeight = "wetWeight"
+        static let driedWeight = "driedWeight"
+    }
 }

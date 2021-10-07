@@ -14,6 +14,8 @@ class EvaluatedResultViewController: UIViewController {
     @IBOutlet weak var soilLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var commentField: UITextField!
+    @IBOutlet weak var discardButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var soilClassificationModel = SoilClassificationModel()
@@ -23,26 +25,23 @@ class EvaluatedResultViewController: UIViewController {
             loadSampleData()
         }
     }
+    var buttonIsHidden = false
     
-    var laboratoryTestResults: LaboratoryResults? {
+    var laboratoryTestResults: LabResultDefault? {
         didSet {
-            testResultsCalculation.soilEvaluation(threeInch: laboratoryTestResults?.threeInch ?? 0.0, threeFourInch: laboratoryTestResults?.threeFourInch ?? 0.0, noFour: laboratoryTestResults?.no4 ?? 0.0, noTen: laboratoryTestResults?.no10 ?? 0.0, noFourty: laboratoryTestResults?.no40 ?? 0.0, noTwoHundred: laboratoryTestResults?.no200 ?? 0.0, pan: laboratoryTestResults?.pan ?? 0.0, plasticLimit: laboratoryTestResults?.plasticLimit ?? 0.0, liquidLimit: laboratoryTestResults?.liquidLimit ?? 0.0, driedWeight: laboratoryTestResults?.driedWeight ?? 0.0, notDriedWeight: laboratoryTestResults?.wetWeight ?? 0.0)
+            testResultsCalculation.soilEvaluation(threeInch: laboratoryTestResults?.threeInch ?? 0.0, threeFourInch: laboratoryTestResults?.threeFourInch ?? 0.0, noFour: laboratoryTestResults?.no4 ?? 0.0, noTen: laboratoryTestResults?.no10 ?? 0.0, noFourty: laboratoryTestResults?.no40 ?? 0.0, noTwoHundred: laboratoryTestResults?.no200 ?? 0.0, pan: laboratoryTestResults?.pan ?? 0.0, plasticLimit: laboratoryTestResults?.pL ?? 0.0, liquidLimit: laboratoryTestResults?.lL ?? 0.0, driedWeight: laboratoryTestResults?.driedWeight ?? 0.0, notDriedWeight: laboratoryTestResults?.wetWeight ?? 0.0)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.isHidden = buttonIsHidden
+        discardButton.isHidden = buttonIsHidden
         loadResultViewData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedOnView)))
-        
-        if soilLabel.text == "Check test results you have entered, soil type couldn't identified." {
-            soilLabel.backgroundColor = .systemRed
-        } else {
-            soilLabel.backgroundColor = .systemGreen
-        }
     }
     
     
@@ -78,14 +77,27 @@ class EvaluatedResultViewController: UIViewController {
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
         } else {
+            let newLaboratoryResult = LaboratoryResults(context: context)
+            
+            newLaboratoryResult.threeInch = laboratoryTestResults!.threeInch
+            newLaboratoryResult.threeFourInch = laboratoryTestResults!.threeFourInch
+            newLaboratoryResult.no4 = laboratoryTestResults!.no4
+            newLaboratoryResult.no10 = laboratoryTestResults!.no10
+            newLaboratoryResult.no40 = laboratoryTestResults!.no40
+            newLaboratoryResult.no200 = laboratoryTestResults!.no200
+            newLaboratoryResult.pan = laboratoryTestResults!.pan
+            newLaboratoryResult.plasticLimit = laboratoryTestResults!.pL
+            newLaboratoryResult.liquidLimit = laboratoryTestResults!.lL
+            newLaboratoryResult.wetWeight = laboratoryTestResults!.wetWeight
+            newLaboratoryResult.driedWeight = laboratoryTestResults!.driedWeight
 
             let newSample = Sample(context: context)
             if let comment = commentField.text {
                 newSample.comment = comment
             }
+            newSample.uuid = UUID().uuidString
             newSample.name = nameField.text
-
-            laboratoryTestResults?.parentSample = newSample
+            newLaboratoryResult.parentSample = newSample
            
             saveData()
             performSegue(withIdentifier: K.Segue.resultViewToTableView, sender: self)
@@ -96,34 +108,23 @@ class EvaluatedResultViewController: UIViewController {
         let alert = UIAlertController(title: "Discard?", message: "All data will be lost if you discard the sample. Are you sure?", preferredStyle: .alert)
         let discard = UIAlertAction(title: "Discard", style: .default) { action in
             self.resignFirstResponder()
-            let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-            do {
-                let laboratoryLast = try self.context.fetch(request).last
-                guard let lastData = laboratoryLast else {
-                    fatalError()
-                }
-                lastData.threeInch = 0
-                lastData.threeFourInch = 0
-                lastData.no4 = 0
-                lastData.no10 = 0
-                lastData.no40 = 0
-                lastData.no200 = 0
-                lastData.pan = 0
-                lastData.driedWeight = 0
-                lastData.wetWeight = 0
-                lastData.plasticLimit = 0
-                lastData.liquidLimit = 0
-        
-                try self.context.save()
-                self.laboratoryTestResults = lastData
-                self.loadResultViewData()
-                
-            } catch {
-                print("Error deleting data: \(error)")
-            }
+            let lastData = UserDefaults.standard
+            lastData.set(0, forKey: K.laboratoryTests.threeInch)
+            lastData.set(0, forKey: K.laboratoryTests.threeFourInch)
+            lastData.set(0, forKey: K.laboratoryTests.noFour)
+            lastData.set(0, forKey: K.laboratoryTests.noTen)
+            lastData.set(0, forKey: K.laboratoryTests.noFourty)
+            lastData.set(0, forKey: K.laboratoryTests.noTwoHundred)
+            lastData.set(0, forKey: K.laboratoryTests.pan)
+            lastData.set(0, forKey: K.laboratoryTests.driedWeight)
+            lastData.set(0, forKey: K.laboratoryTests.wetWeight)
+            lastData.set(0, forKey: K.laboratoryTests.plasticLimit)
+            lastData.set(0, forKey: K.laboratoryTests.liquidLimit)
            
             self.nameField.text = ""
             self.commentField.text = ""
+            self.laboratoryTestResults = self.newLabTest(data: nil)
+            self.loadResultViewData()
         }
        
         let dontDiscard = UIAlertAction(title: "Don't Discard", style: .default) { action in
@@ -155,10 +156,29 @@ class EvaluatedResultViewController: UIViewController {
         request.predicate = samplePredicate
 
         do {
-            laboratoryTestResults = try context.fetch(request).first
+            let data = try context.fetch(request).first
+            laboratoryTestResults = newLabTest(data: data)
         } catch {
             print("Error fetch predicate sample: \(error)")
         }
+    }
+    
+    func newLabTest(data: LaboratoryResults?) -> LabResultDefault? {
+        var newLabResults = LabResultDefault()
+        
+        newLabResults.threeInch = data?.threeInch ?? 0.0
+        newLabResults.threeFourInch = data?.threeFourInch ?? 0.0
+        newLabResults.no4 = data?.no4 ?? 0.0
+        newLabResults.no10 = data?.no10 ?? 0.0
+        newLabResults.no40 = data?.no40 ?? 0.0
+        newLabResults.no200 = data?.no200 ?? 0.0
+        newLabResults.pan = data?.pan ?? 0.0
+        newLabResults.pL = data?.plasticLimit ?? 0.0
+        newLabResults.lL = data?.liquidLimit ?? 0.0
+        newLabResults.wetWeight = data?.wetWeight ?? 0.0
+        newLabResults.driedWeight = data?.driedWeight ?? 0.0
+        
+        return newLabResults
     }
     
     
@@ -174,13 +194,27 @@ class EvaluatedResultViewController: UIViewController {
         let noFourtyPer = testResultsCalculation.passingPercent["noFourtyPer"] ?? 0.0
         let noTwoHundredPer = testResultsCalculation.passingPercent["noTwoHundredPer"] ?? 0.0
         
-        let lL = laboratoryTestResults?.liquidLimit ?? 0.0
-        let pL = laboratoryTestResults?.plasticLimit ?? 0.0
+        let lL = laboratoryTestResults?.lL ?? 0.0
+        let pL = laboratoryTestResults?.pL ?? 0.0
         let organicConstant = testResultsCalculation.organicConstant
         let cc = testResultsCalculation.cC
         let cu = testResultsCalculation.cU
          
-        self.soilLabel.text = soilClassificationModel.classificateSoil(d60: d60, d30: d30, d10: d10, threeIncPer: threeIncPer, threeFourPer:threeFourPer, noFourPer: noFourPer, noTenPer: noTenPer, noFourtyPer: noFourtyPer, noTwoHundredPer: noTwoHundredPer, lL: lL, pL: pL, organicConstant: organicConstant, cc: cc, cu: cu)
+        soilLabel.text = soilClassificationModel.classificateSoil(d60: d60, d30: d30, d10: d10, threeIncPer: threeIncPer, threeFourPer:threeFourPer, noFourPer: noFourPer, noTenPer: noTenPer, noFourtyPer: noFourtyPer, noTwoHundredPer: noTwoHundredPer, lL: lL, pL: pL, organicConstant: organicConstant, cc: cc, cu: cu)
+        if let sample = sample {
+            if let sampleComment = sample.comment {
+                commentField.text = sampleComment
+            }
+            guard let sampleName = sample.name else {
+                fatalError()
+            }
+            nameField.text = sampleName
+        }
         
+        if soilLabel.text == "Check test results you have entered, soil type couldn't identified." {
+            soilLabel.backgroundColor = .systemRed
+        } else {
+            soilLabel.backgroundColor = .systemGreen
+        }
     }
 }

@@ -20,9 +20,9 @@ class GradationChartViewController: UIViewController {
     @IBOutlet weak var notSupportedLabel: UILabel!
     
     private var testResultsCalculationModel = TestResultsCalculationModel()
-    var laboratoryTestResults: LaboratoryResults? {
+    var laboratoryTestResults: LabResultDefault? {
         didSet {
-            testResultsCalculationModel.soilEvaluation(threeInch: laboratoryTestResults?.threeInch ?? 0.0, threeFourInch: laboratoryTestResults?.threeFourInch ?? 0.0, noFour: laboratoryTestResults?.no4 ?? 0.0, noTen: laboratoryTestResults?.no10 ?? 0.0, noFourty: laboratoryTestResults?.no40 ?? 0.0, noTwoHundred: laboratoryTestResults?.no200 ?? 0.0, pan: laboratoryTestResults?.pan ?? 0.0, plasticLimit: laboratoryTestResults?.plasticLimit ?? 0.0, liquidLimit: laboratoryTestResults?.liquidLimit ?? 0.0, driedWeight: laboratoryTestResults?.driedWeight ?? 0.0, notDriedWeight: laboratoryTestResults?.wetWeight ?? 0.0)
+            testResultsCalculationModel.soilEvaluation(threeInch: laboratoryTestResults?.threeInch ?? 0.0, threeFourInch: laboratoryTestResults?.threeFourInch ?? 0.0, noFour: laboratoryTestResults?.no4 ?? 0.0, noTen: laboratoryTestResults?.no10 ?? 0.0, noFourty: laboratoryTestResults?.no40 ?? 0.0, noTwoHundred: laboratoryTestResults?.no200 ?? 0.0, pan: laboratoryTestResults?.pan ?? 0.0, plasticLimit: laboratoryTestResults?.pL ?? 0.0, liquidLimit: laboratoryTestResults?.lL ?? 0.0, driedWeight: laboratoryTestResults?.driedWeight ?? 0.0, notDriedWeight: laboratoryTestResults?.wetWeight ?? 0.0)
         }
     }
     var sample: Sample? {
@@ -304,11 +304,24 @@ class GradationChartViewController: UIViewController {
     
     func loadData() {
         let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-        let predicate = NSPredicate(format: "parentSample.name MATCHES %@", sample!.name!)
+        let predicate = NSPredicate(format: "parentSample.uuid MATCHES %@", sample!.uuid!)
         request.predicate = predicate
 
         do {
-            laboratoryTestResults = try context.fetch(request).first
+            let data = try context.fetch(request).last
+            var newLabResults = LabResultDefault()
+            newLabResults.threeInch = data!.threeInch
+            newLabResults.threeFourInch = data!.threeFourInch
+            newLabResults.no4 = data!.no4
+            newLabResults.no10 = data!.no10
+            newLabResults.no40 = data!.no40
+            newLabResults.no200 = data!.no200
+            newLabResults.pan = data!.pan
+            newLabResults.pL = data!.plasticLimit
+            newLabResults.lL = data!.liquidLimit
+            newLabResults.wetWeight = data!.wetWeight
+            newLabResults.driedWeight = data!.driedWeight
+            laboratoryTestResults = newLabResults
         } catch {
             print("Error fetch data for graph: \(error)")
         }

@@ -23,29 +23,21 @@ class TestResultsViewController: UIViewController {
     @IBOutlet weak var wetWeightLabel: UITextField!
     @IBOutlet weak var driedLabel: UILabel!
     
-    
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var laboratoryTestResults: [LaboratoryResults]?
-    private var testResultsCalculationModel = TestResultsCalculationModel()
-    
+    private let defaults = UserDefaults.standard
+    private var labResult = LabResultDefault()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.isNavigationBarHidden = false
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedOnView)))
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        saveData()
-    }
     override func viewWillAppear(_ animated: Bool) {
         loadData()
-        updateDriedLabel()
     }
-    
-    
     
     //MARK: - Keyboard settings
     
@@ -72,9 +64,15 @@ class TestResultsViewController: UIViewController {
     
     //MARK: - Button pressed
     
-    @IBAction func evulatePressed(_ sender: UIButton) {
+    @IBAction func backPressed(_ sender: UIBarButtonItem) {
         saveData()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func evulatePressed(_ sender: UIButton) {
+        
         if threeInchLabel.isEditing == false && threeFourInchLabel.isEditing == false && noFourLabel.isEditing == false && noTenLabel.isEditing == false && noFourLabel.isEditing == false && noTwoHundredLabel.isEditing == false && panLabel.isEditing == false && wetWeightLabel.isEditing == false && plasticLimitLabel.isEditing == false && liquidLimitLabel.isEditing == false {
+            saveData()
             performSegue(withIdentifier: K.Segue.sieveResultsToTabCtrl, sender: self)
         } else {
             threeInchLabel.endEditing(true)
@@ -98,10 +96,12 @@ class TestResultsViewController: UIViewController {
         let destinationVC = tabCtrl.viewControllers![0] as! EvaluatedResultViewController
         let destinationVC2 = tabCtrl.viewControllers![1] as! GradationChartViewController
         let destinationVC3 = tabCtrl.viewControllers![2] as! PlasticityChartViewController
-       
-        destinationVC.laboratoryTestResults = laboratoryTestResults?.last
-        destinationVC2.laboratoryTestResults = laboratoryTestResults?.last
-        destinationVC3.laboratoryResults = laboratoryTestResults?.last
+        
+        destinationVC.laboratoryTestResults = labResult
+        destinationVC.buttonIsHidden = false
+        
+        destinationVC2.laboratoryTestResults = labResult
+        destinationVC3.laboratoryResults = labResult
     }
     
     @IBAction func clearPressed(_ sender: UIButton) {
@@ -120,151 +120,129 @@ class TestResultsViewController: UIViewController {
     //MARK: - Data Manipulation
     
     func saveData() {
-        let newLaboratoryResults = LaboratoryResults(context: context)
-        updateOrCreateData(with: newLaboratoryResults)
-    }
-    
-    func loadData() {
-        let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-        
-        do {
-            laboratoryTestResults = try context.fetch(request)
-        } catch {
-            print("Error fetching laboratory results: \(error)")
-        }
-        
-        if laboratoryTestResults?.last?.plasticLimit == 0 {
-            plasticLimitLabel.text = ""
-        } else if let pLSafe = laboratoryTestResults?.last?.plasticLimit {
-            plasticLimitLabel.text = String(pLSafe)
-        }
-        
-        if laboratoryTestResults?.last?.liquidLimit == 0 {
-            liquidLimitLabel.text = ""
-        } else if let lLSafe = laboratoryTestResults?.last?.liquidLimit {
-            liquidLimitLabel.text = String(lLSafe)
-        }
-        
-        if laboratoryTestResults?.last?.threeInch == 0 {
-            threeInchLabel.text = ""
-        } else if let safeThreeInch = laboratoryTestResults?.last?.threeInch{
-            threeInchLabel.text = String(safeThreeInch)
-        }
-        
-        if laboratoryTestResults?.last?.threeFourInch == 0 {
-            threeFourInchLabel.text = ""
-        } else if let safeThreeFourInch = laboratoryTestResults?.last?.threeFourInch {
-            threeFourInchLabel.text = String(safeThreeFourInch)
-        }
-        
-        if laboratoryTestResults?.last?.no4 == 0 {
-            noFourLabel.text = ""
-        } else if let safeNoFour = laboratoryTestResults?.last?.no4{
-            noFourLabel.text = String(safeNoFour)
-        }
-        
-        if laboratoryTestResults?.last?.no10 == 0 {
-            noTenLabel.text = ""
-        } else if let safeNoTen = laboratoryTestResults?.last?.no10 {
-            noTenLabel.text = String(safeNoTen)
-        }
-        
-        if laboratoryTestResults?.last?.no40 == 0 {
-            noFourtyLabel.text = ""
-        } else if let safeNoFourty = laboratoryTestResults?.last?.no40{
-            noFourtyLabel.text = String(safeNoFourty)
-        }
-        
-        if laboratoryTestResults?.last?.no200 == 0 {
-            noTwoHundredLabel.text = ""
-        } else if let safeNoTwoHundred = laboratoryTestResults?.last?.no200 {
-            noTwoHundredLabel.text = String(safeNoTwoHundred)
-        }
-        
-        if laboratoryTestResults?.last?.pan == 0 {
-            panLabel.text = ""
-        } else if let safePan = laboratoryTestResults?.last?.pan {
-            panLabel.text = String(safePan)
-        }
-        
-        if laboratoryTestResults?.last?.driedWeight == 0 {
-            driedLabel.text = ""
-        } else if let safeDried = laboratoryTestResults?.last?.driedWeight {
-            driedLabel.text = String(safeDried)
-        }
-        
-        if laboratoryTestResults?.last?.wetWeight == 0 {
-            wetWeightLabel.text = ""
-        } else if let safeNotDried = laboratoryTestResults?.last?.wetWeight {
-            wetWeightLabel.text = String(safeNotDried)
-        }
-    }
-    
-    func updateData() {
-        let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-        
-        do {
-            let results = try context.fetch(request)
-            if let resultSafe = results.last {
-                updateOrCreateData(with: resultSafe)
-            }
-        } catch {
-            print("Error fetching laboratory results: \(error)")
-        }
-    }
-    
-    func updateOrCreateData(with newLaboratoryResults: LaboratoryResults) {
         if let safeThreeInch = threeInchLabel.text {
-            newLaboratoryResults.threeInch = Double(safeThreeInch) ?? 0.0
+            defaults.set(Double(safeThreeInch) ?? 0.0, forKey: K.laboratoryTests.threeInch)
         }
         
         if let safeThreeFourInch = threeFourInchLabel.text {
-            newLaboratoryResults.threeFourInch = Double(safeThreeFourInch) ?? 0.0
+            defaults.set(Double(safeThreeFourInch) ?? 0.0, forKey: K.laboratoryTests.threeFourInch)
         }
         
         if let safeNoFour = noFourLabel.text {
-            newLaboratoryResults.no4 = Double(safeNoFour) ?? 0.0
+            defaults.set(Double(safeNoFour) ?? 0.0, forKey: K.laboratoryTests.noFour)
         }
         
         if let safeNoTen = noTenLabel.text {
-            newLaboratoryResults.no10 = Double(safeNoTen) ?? 0.0
+            defaults.set(Double(safeNoTen) ?? 0.0, forKey: K.laboratoryTests.noTen)
         }
         
         if let safeNoFourty = noFourtyLabel.text {
-            newLaboratoryResults.no40 = Double(safeNoFourty) ?? 0.0
+            defaults.set(Double(safeNoFourty) ?? 0.0, forKey: K.laboratoryTests.noFourty)
         }
         
         if let safeNoTwoHundred = noTwoHundredLabel.text {
-            newLaboratoryResults.no200 = Double(safeNoTwoHundred) ?? 0.0
+            defaults.set(Double(safeNoTwoHundred) ?? 0.0, forKey: K.laboratoryTests.noTwoHundred)
         }
         
         if let safePan = panLabel.text {
-            newLaboratoryResults.pan = Double(safePan) ?? 0.0
+            defaults.set(Double(safePan), forKey: K.laboratoryTests.pan)
         }
         
         if let safeLL = liquidLimitLabel.text {
-            newLaboratoryResults.liquidLimit = Double(safeLL) ?? 0.0
+            defaults.set(Double(safeLL) ?? 0.0, forKey: K.laboratoryTests.liquidLimit)
         }
         
         if let safePL = plasticLimitLabel.text {
-            newLaboratoryResults.plasticLimit = Double(safePL) ?? 0.0
+            defaults.set(Double(safePL) ?? 0.0, forKey: K.laboratoryTests.plasticLimit)
         }
         
         if let safeDried = driedLabel.text {
-            newLaboratoryResults.driedWeight = Double(safeDried) ?? 0.0
+            defaults.set(Double(safeDried) ?? 0.0, forKey: K.laboratoryTests.driedWeight)
         }
         
         if let safeNotDried = wetWeightLabel.text {
-            newLaboratoryResults.wetWeight = Double(safeNotDried) ?? 0.0
+            defaults.set(Double(safeNotDried) ?? 0.0, forKey: K.laboratoryTests.wetWeight)
         }
         
-        laboratoryTestResults = [newLaboratoryResults]
+        var newLabResult = LabResultDefault()
+        newLabResult.pan = defaults.double(forKey: K.laboratoryTests.pan)
+        newLabResult.driedWeight = defaults.double(forKey: K.laboratoryTests.driedWeight)
+        newLabResult.wetWeight = defaults.double(forKey: K.laboratoryTests.wetWeight)
+        newLabResult.threeInch = defaults.double(forKey: K.laboratoryTests.threeInch)
+        newLabResult.threeFourInch  = defaults.double(forKey: K.laboratoryTests.threeFourInch)
+        newLabResult.no4 = defaults.double(forKey: K.laboratoryTests.noFour)
+        newLabResult.no10 = defaults.double(forKey: K.laboratoryTests.noTen)
+        newLabResult.no40 = defaults.double(forKey: K.laboratoryTests.noFourty)
+        newLabResult.no200 = defaults.double(forKey: K.laboratoryTests.noTwoHundred)
+        newLabResult.pL = defaults.double(forKey: K.laboratoryTests.plasticLimit)
+        newLabResult.lL = defaults.double(forKey: K.laboratoryTests.liquidLimit)
         
-        do {
-            try context.save()
-        } catch {
-            print("Error saving test results: \(error)")
+        labResult = newLabResult
+        
+    }
+    
+    func loadData() {
+        if defaults.double(forKey: K.laboratoryTests.threeInch) == 0 {
+            threeInchLabel.text = ""
+        } else {
+            threeInchLabel.text = String(defaults.double(forKey: K.laboratoryTests.threeInch))
         }
+        
+        if defaults.double(forKey: K.laboratoryTests.threeFourInch) == 0 {
+            threeFourInchLabel.text = ""
+        } else {
+            threeFourInchLabel.text = String(defaults.double(forKey:  K.laboratoryTests.threeFourInch))
+        }
+       
+        if defaults.double(forKey: K.laboratoryTests.noFour) == 0 {
+            noFourLabel.text = ""
+        } else {
+            noFourLabel.text = String(defaults.double(forKey: K.laboratoryTests.noFour))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.noTen) == 0 {
+            noTenLabel.text = ""
+        } else {
+            noTenLabel.text = String(defaults.double(forKey: K.laboratoryTests.noTen))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.noFourty) == 0 {
+            noFourtyLabel.text = ""
+        } else {
+            noFourtyLabel.text = String(defaults.double(forKey: K.laboratoryTests.noFourty))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.noTwoHundred) == 0 {
+            noTwoHundredLabel.text = ""
+        } else {
+            noTwoHundredLabel.text = String(defaults.double(forKey: K.laboratoryTests.noTwoHundred))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.pan) == 0 {
+            panLabel.text = ""
+        } else {
+            panLabel.text = String(defaults.double(forKey: K.laboratoryTests.pan))
+        }
+       
+        if defaults.double(forKey: K.laboratoryTests.plasticLimit) == 0 {
+            plasticLimitLabel.text = ""
+        } else {
+            plasticLimitLabel.text = String(defaults.double(forKey: K.laboratoryTests.plasticLimit))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.liquidLimit) == 0 {
+            liquidLimitLabel.text = ""
+        } else {
+            liquidLimitLabel.text = String(defaults.double(forKey: K.laboratoryTests.liquidLimit))
+        }
+        
+        if defaults.double(forKey: K.laboratoryTests.wetWeight) == 0 {
+            wetWeightLabel.text = ""
+        } else {
+            wetWeightLabel.text = String(defaults.double(forKey: K.laboratoryTests.wetWeight))
+        }
+       
+        driedLabel.text = String(defaults.double(forKey: K.laboratoryTests.driedWeight))
     }
 }
 
@@ -273,18 +251,15 @@ class TestResultsViewController: UIViewController {
 extension TestResultsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        updateDriedLabel()
-    }
-    
-    func updateDriedLabel() {
         let threeInch = Double(threeInchLabel.text ?? "0.0") ?? 0.0
         let threeFourInch = Double(threeFourInchLabel.text ?? "0.0") ?? 0.0
         let noFour = Double(noFourLabel.text ?? "0.0") ?? 0.0
         let noTen = Double(noTenLabel.text ?? "0.0") ?? 0.0
         let noFourty = Double(noFourtyLabel.text ?? "0.0") ?? 0.0
-        let noTwoHundredLabel = Double(noTwoHundredLabel.text ?? "0.0") ?? 0.0
+        let noTwoHundred = Double(noTwoHundredLabel.text ?? "0.0") ?? 0.0
         let pan = Double(panLabel.text ?? "0.0") ?? 0.0
-        let cum = threeInch + threeFourInch + noFour + noTen + noFourty + noTwoHundredLabel + pan
+        let cum = threeInch + threeFourInch + noFour + noTen + noFourty + noTwoHundred + pan
+        
         driedLabel.text = String(cum)
     }
 }

@@ -64,6 +64,7 @@ class SavedSampleViewController: UITableViewController {
         let destinationVC3 = tabCtrl.viewControllers![2] as! PlasticityChartViewController
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.sample = sample[indexPath.row]
+            destinationVC.buttonIsHidden = true
             destinationVC2.sample = sample[indexPath.row]
             destinationVC3.sample = sample[indexPath.row]
         }

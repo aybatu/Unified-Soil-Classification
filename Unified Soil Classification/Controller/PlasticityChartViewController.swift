@@ -18,7 +18,7 @@ class PlasticityChartViewController: UIViewController {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var laboratoryResults: LaboratoryResults?
+    var laboratoryResults: LabResultDefault?
     var sample: Sample? {
         didSet {
             predicateLabResults()
@@ -298,7 +298,7 @@ class PlasticityChartViewController: UIViewController {
     
     func loadData() {
         
-        if let liquidLimit = laboratoryResults?.liquidLimit, let plasticLimit = laboratoryResults?.plasticLimit {
+        if let liquidLimit = laboratoryResults?.lL, let plasticLimit = laboratoryResults?.pL {
             let plasticityIndex = liquidLimit - plasticLimit
            //result marker
            liquidLimitXAxis = [Double(liquidLimit), Double(liquidLimit)]
@@ -315,11 +315,24 @@ class PlasticityChartViewController: UIViewController {
     
     func predicateLabResults() {
         let request: NSFetchRequest<LaboratoryResults> = LaboratoryResults.fetchRequest()
-        let predicate = NSPredicate(format: "parentSample.name MATCHES %@", sample!.name!)
+        let predicate = NSPredicate(format: "parentSample.uuid MATCHES %@", sample!.uuid!)
         request.predicate = predicate
 
         do {
-            laboratoryResults = try context.fetch(request).first
+            let data = try context.fetch(request).last
+            var newLabResults = LabResultDefault()
+            newLabResults.threeInch = data!.threeInch
+            newLabResults.threeFourInch = data!.threeFourInch
+            newLabResults.no4 = data!.no4
+            newLabResults.no10 = data!.no10
+            newLabResults.no40 = data!.no40
+            newLabResults.no200 = data!.no200
+            newLabResults.pan = data!.pan
+            newLabResults.pL = data!.plasticLimit
+            newLabResults.lL = data!.liquidLimit
+            newLabResults.wetWeight = data!.wetWeight
+            newLabResults.driedWeight = data!.driedWeight
+            laboratoryResults = newLabResults
         } catch {
             print("Error fetch data for graph: \(error)")
         }
