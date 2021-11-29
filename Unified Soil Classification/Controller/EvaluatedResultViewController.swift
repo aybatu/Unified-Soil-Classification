@@ -10,6 +10,7 @@ import CoreData
 
 class EvaluatedResultViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var soilLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -20,6 +21,7 @@ class EvaluatedResultViewController: UIViewController {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var soilClassificationModel = SoilClassificationModel()
     private var testResultsCalculation = TestResultsCalculationModel()
+    private var imagePicker = UIImagePickerController()
     var sample: Sample? {
         didSet {
             loadSampleData()
@@ -35,6 +37,7 @@ class EvaluatedResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
         saveButton.isHidden = buttonIsHidden
         discardButton.isHidden = buttonIsHidden
         loadResultViewData()
@@ -70,6 +73,11 @@ class EvaluatedResultViewController: UIViewController {
     //MARK: - Button Pressed
     
     @IBAction func savePressed(_ sender: UIButton) {
+        sender.alpha = 0.4
+        Timer.scheduledTimer(withTimeInterval: 0.2 , repeats: false ) { timer in
+            sender.alpha = 1
+        }
+        
         if nameField.text == "" {
             let alert = UIAlertController(title: "Please Enter A Title", message: "You must specify a Sample Name before saving a new sample.", preferredStyle: .alert)
             let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
@@ -97,6 +105,7 @@ class EvaluatedResultViewController: UIViewController {
             }
             newSample.uuid = UUID().uuidString
             newSample.name = nameField.text
+            newSample.img = imageView.image?.pngData()
             newLaboratoryResult.parentSample = newSample
            
             saveData()
@@ -105,6 +114,11 @@ class EvaluatedResultViewController: UIViewController {
     }
     
     @IBAction func discardPressed(_ sender: UIButton) {
+        sender.alpha = 0.4
+        Timer.scheduledTimer(withTimeInterval: 0.2 , repeats: false ) { timer in
+            sender.alpha = 1
+        }
+        
         let alert = UIAlertController(title: "Discard?", message: "All data will be lost if you discard the sample. Are you sure?", preferredStyle: .alert)
         let discard = UIAlertAction(title: "Discard", style: .default) { action in
             self.resignFirstResponder()
@@ -137,7 +151,39 @@ class EvaluatedResultViewController: UIViewController {
         
     }
     
-   
+    @IBAction func cameraPressed(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Pick Image", message: "Pick an image from gallery or take a new photo.", preferredStyle: .alert)
+        
+        let galleryAction = UIAlertAction(title: "Open Gallery", style: .default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+
+                self.imagePicker.sourceType = .savedPhotosAlbum
+                self.imagePicker.allowsEditing = false
+                self.present(self.imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        let cameraAction = UIAlertAction(title: "Take a New Photo", style: .default) { alert in
+            if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+                {
+                self.imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                self.present(self.imagePicker, animated: true, completion: nil)
+                }
+        }
+        
+        alert.addAction(galleryAction)
+        alert.addAction(cameraAction)
+        
+        present(alert, animated: true) {
+            alert.view.superview?.isUserInteractionEnabled = true
+                  alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        }
+        
+    }
+    
+    @objc func alertControllerBackgroundTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //MARK: - Data Manupilaction
     
@@ -205,16 +251,36 @@ class EvaluatedResultViewController: UIViewController {
             if let sampleComment = sample.comment {
                 commentField.text = sampleComment
             }
+            
+            if let sampleImg = sample.img {
+                let image = UIImage(data: sampleImg)
+                imageView.contentMode = .scaleAspectFill
+                imageView.image = image
+            }
+            
             guard let sampleName = sample.name else {
                 fatalError()
             }
             nameField.text = sampleName
         }
         
+        
         if soilLabel.text == "Check test results you have entered, soil type couldn't identified." {
             soilLabel.backgroundColor = .systemRed
         } else {
             soilLabel.backgroundColor = .systemGreen
         }
+    }
+}
+//MARK: - UIImagaPicker Delegate Methods
+extension EvaluatedResultViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[.originalImage] as? UIImage else {
+            fatalError()
+        }
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
     }
 }

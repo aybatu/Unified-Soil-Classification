@@ -25,7 +25,7 @@ class TestResultsViewController: UIViewController {
     
     private let defaults = UserDefaults.standard
     private var labResult = LabResultDefault()
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +70,10 @@ class TestResultsViewController: UIViewController {
     }
     
     @IBAction func evulatePressed(_ sender: UIButton) {
+        sender.alpha = 0.4
+        Timer.scheduledTimer(withTimeInterval: 0.2 , repeats: false ) { timer in
+            sender.alpha = 1
+        }
         
         if threeInchLabel.isEditing == false && threeFourInchLabel.isEditing == false && noFourLabel.isEditing == false && noTenLabel.isEditing == false && noFourLabel.isEditing == false && noTwoHundredLabel.isEditing == false && panLabel.isEditing == false && wetWeightLabel.isEditing == false && plasticLimitLabel.isEditing == false && liquidLimitLabel.isEditing == false {
             saveData()
@@ -105,6 +109,11 @@ class TestResultsViewController: UIViewController {
     }
     
     @IBAction func clearPressed(_ sender: UIButton) {
+        sender.alpha = 0.4
+        Timer.scheduledTimer(withTimeInterval: 0.2 , repeats: false ) { timer in
+            sender.alpha = 1
+        }
+        
         noFourtyLabel.text = ""
         noTenLabel.text = ""
         noFourLabel.text = ""
@@ -262,4 +271,27 @@ extension TestResultsViewController: UITextFieldDelegate {
         
         driedLabel.text = String(cum)
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.text == "" {
+            if string != "." && string != "," {
+                return true
+            }
+        } else {
+            if string == "," {
+                if textField.text?.contains(".") == false {
+                    textField.text = textField.text! + "."
+                    return false
+                }
+                return false
+            } else if string == "." {
+                if textField.text!.contains(".") {
+                    return false
+                }
+            }
+            return true
+        }
+        return false
+    }
+
 }
